@@ -1,0 +1,45 @@
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	height:100%;
+}
+body {
+	margin:0;
+	line-height:1.5em;
+	background: #dedede;
+	position: relative;
+}
+
+#app {
+	min-height:100%;
+	display: grid;
+	grid-template-rows: 80px auto 30px;
+	grid-gap: 0;
+	position: relative;
+	text-align: center;
+	font-family: 'Noto Sans JP', sans-serif;
+}
+
+
+header {
+	z-index:400;
+	background: #d3d3d3;
+	position: relative;
+	box-shadow: 0 0 8px rgba(0,0,0,0.4);
+	border-bottom: 1px solid #d0d0d0;
+}
+
+main {
+	background: #efefef;
+	padding: 60px 20px;
+	position: relative;
+}
+
+footer {
+	background: #d3d3d3;
+	font-size:0.8rem;
+	line-height:30px;
+}
+
