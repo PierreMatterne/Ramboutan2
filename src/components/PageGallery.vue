@@ -3,11 +3,13 @@
 		<h2>{{titlePage}} : {{currentGallery}}</h2>
 
 		<div class="grid">
-
-			<photo :photo="photo" v-for="(photo, key) in listPhotosForThisAlbum" :key="key">test
+			<photo @click.native="detailThisPhoto(photo)" :photo="photo" v-for="(photo, key) in listPhotosForThisAlbum" :key="key">test
 			</photo>
-
 		</div>
+
+		<transition name="fade">
+			<modalphoto v-if="detailPhoto" @closeModale="closeModale()" :photo="openendPhoto"></modalphoto>
+		</transition>
 
 	</div>
 </template>
@@ -15,17 +17,28 @@
 <script>
 	import {listPhotos} from '../data.js';
 	import PhotoThumb from './PhotoThumb.vue';
+	import PhotoModal from './PhotoModal.vue';
 
 	export default {
 		name: 'app',
 		data () {
 			return {
 				titlePage : 'Gallery',
-				listPhotos
+				listPhotos,
+				detailPhoto: false
 			}
 		},
-		components: {'photo':PhotoThumb},
+		components: {'photo':PhotoThumb, 'modalphoto':PhotoModal},
 		props:['currentGallery'],
+		methods : {
+			closeModale(){
+				this.detailPhoto = false;
+			},
+			detailThisPhoto(photo){
+				this.detailPhoto = true;
+				this.openendPhoto = photo;
+			}
+		},
 		computed: {
 			listPhotosForThisAlbum: function(){
 				return this.listPhotos.filter(photo => photo.inAlbum === this.currentGallery);

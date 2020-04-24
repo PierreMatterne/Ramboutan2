@@ -38,7 +38,7 @@ export const listPhotos = [
 	inAlbum : "Many Pictures",
 	name: "",
 	weight : 72.3, 
-	date : 20200416,
+	date : 20201016,
 	width: 500, // in px
 	height: 500, // in px
 	isAlbumCover: false
@@ -71,7 +71,7 @@ export const listPhotos = [
 	inAlbum : "Many more",
 	name: "Keys",
 	weight : 4, 
-	date : 20040308,
+	date : 20210308,
 	width: 170, // in px
 	height: 170, // in px
 	isAlbumCover: true
@@ -82,7 +82,7 @@ export const listPhotos = [
 	inAlbum : "Many more",
 	name: "Eclipse",
 	weight : 5, 
-	date : 20040301,
+	date : 20210301,
 	width: 170, // in px
 	height: 170, // in px
 	isAlbumCover: false
@@ -93,7 +93,7 @@ export const listPhotos = [
 	inAlbum : "Many more",
 	name: "Phone",
 	weight : 4, 
-	date : 20040315,
+	date : 20210315,
 	width: 170, // in px
 	height: 170, // in px
 	isAlbumCover: false
