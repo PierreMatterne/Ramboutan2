@@ -1,5 +1,7 @@
 <template>
+	
 	<div id="gallery">
+
 		<h2>{{titlePage}} : {{currentGallery}}</h2>
 
 		<div class="grid">
@@ -10,8 +12,9 @@
 		<transition name="fade">
 			<modalphoto v-if="detailPhoto" @closeModale="closeModale()" :photo="openendPhoto"></modalphoto>
 		</transition>
-
+		
 	</div>
+
 </template>
 
 <script>

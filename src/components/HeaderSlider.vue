@@ -1,5 +1,5 @@
 <template>
-	<div class="slider">
+	<div class="slider" :class="{active:isActive}" @click="isActive = !isActive">
 		<div class="title">{{title}}</div>
 		<div class="content"><h2>{{title}}</h2><slot></slot></div>
 	</div>
@@ -7,16 +7,17 @@
 
 <script>
 	export default {
+		data (){
+			return {
+				isActive: false
+			}
+		},
 		props:['title']
 	}
 </script>
 
 <style scoped>
 .slider {
-	position: absolute;
-	top: 0;
-	right:40px;
-	max-width:200px;
 	background: #d3d3d3;
 	transform: translateY(-100%) translateY(24px);
 	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.0);
