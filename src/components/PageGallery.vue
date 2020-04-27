@@ -4,16 +4,20 @@
 
 		<h2>{{titlePage}} : {{currentGallery}}</h2>
 
-		<div class="grid">
-			<photo @click.native="detailThisPhoto(photo)" :photo="photo" v-for="(photo, key) in listPhotosForThisAlbum" :key="key">test
-			</photo>
-		</div>
-
 		<transition name="fade">
-			<modalphoto v-if="detailPhoto" @closeModale="closeModale()" :photo="openendPhoto"></modalphoto>
+			<div class="grid" v-if="isThumbsDisplayed">
+
+				<photothumb @click.native.stop="detailThisPhoto(photo)" :photo="photo" v-for="(photo, key) in listPhotosForThisAlbum" :key="key"></photothumb>
+
+			</div>
 		</transition>
-		
-	</div>
+
+
+	<transition name="fade">
+		<modalphoto v-if="detailPhoto" @closeModale="closeModale()" :photo="openendPhoto"></modalphoto>
+	</transition>
+
+</div>
 
 </template>
 
@@ -31,8 +35,8 @@
 				detailPhoto: false
 			}
 		},
-		components: {'photo':PhotoThumb, 'modalphoto':PhotoModal},
-		props:['currentGallery'],
+		components: {'photothumb':PhotoThumb, 'modalphoto':PhotoModal},
+		props:['currentGallery','isThumbsDisplayed'],
 		methods : {
 			closeModale(){
 				this.detailPhoto = false;

@@ -4,9 +4,7 @@
 		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio labore iste ea aperiam dolorem aut ratione. Unde reiciendis quidem eaque accusamus esse vitae facilis blanditiis nostrum voluptatem velit, qui quisquam.</p>
 
 		<div class="albumsgrid">
-			<div v-for="photo in listPhotosAlbums" :key='photo.id' @click="goToGallery(photo.inAlbum)">
-				<thumbnail :photo="photo"></thumbnail>
-			</div>
+			<thumbnail :photo="photo" v-for="photo in listPhotosAlbums" :key='photo.id' @click.native="goToGallery(photo.inAlbum)"></thumbnail>
 		</div>
 
 	</div>
@@ -33,7 +31,6 @@
 		methods : {
 			goToGallery: function (albumName){
 				this.$emit('loadGallery', albumName);
-				this.$router.push({path: '/gallery'});
 			}
 		}
 	}

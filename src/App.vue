@@ -11,20 +11,17 @@
 			</transition>
 		</header>
 
-		<main>
+		<main @click.stop="checkClick($event)">
 			<div class="sliders">
 				<slider title="À propos"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni repellat asperiores tenetur dignissimos minus voluptas odio quam totam libero eveniet itaque quibusdam qui tempora, cum quod repellendus quas. Saepe, expedita.</p></slider>
 
 				<slider title="Galleries">
-					<p>Pourrait afficher une liste des galeries. 
+					<p>Where to go? 
 						<ul class="listAlbums">
 							<li v-for="album in listPhotosAlbums" @click="displayGallery(album.inAlbum)">
 								{{album.inAlbum}}
 							</li>
 						</ul>
-						<div style="text-align:justify; padding:10px 20px;font-size:0.8rem; color:rgba(0,0,0,0.5)">
-							DevNote: cela fonctionne… quand on est déjà dans la galerie. Depuis la page d'accueil, il n'y a pas encore de redirection vers la galerie. Puis, la transition n'est pas fadée.
-						</div>
 					</p>
 				</slider>
 
@@ -33,10 +30,10 @@
 				<slider title="Contact">
 					<p>Et ici sont disponibles mes coordonnées.</p>
 				</slider>
-			</div>
+			</div> 
 
 			<transition name="fade" mode="out-in">
-				<router-view :currentGallery="currentGallery" @loadGallery="displayGallery($event)"></router-view>
+				<router-view :currentGallery="currentGallery" :isThumbsDisplayed="isThumbsDisplayed" @loadGallery="displayGallery($event)"></router-view>
 			</transition>
 		</main>
 
@@ -55,20 +52,43 @@
 				listPhotos,
 				title : 'Ramboutan v2.0',
 				currentGallery : '',
-				isLinkHomeVisible : false
+				isLinkHomeVisible : false,
+				isThumbsDisplayed : true
 			}
 		},
 		components:{'slider':Slider},
 		methods : {
-			displayGallery (event){
+			displayGallery : function(event){
 				// event is an albumName
-				this.currentGallery = event;
+
 				this.isLinkHomeVisible = true;
+				// this.currentGallery = event;
+				if(this.$route.path != "/gallery"){
+					this.$router.push({path: '/gallery'});
+				}
+				let vm = this;
+				this.isThumbsDisplayed = false;
+				setTimeout(
+					function(){
+
+						vm.isThumbsDisplayed = true;
+					}, 300);
+				this.currentGallery = event;
 			},
-			hideHomeLink (){
+
+			hideHomeLink : function(){
 				this.currentGallery = '';
 				this.isLinkHomeVisible = false;
 			},
+
+			checkClick : function(event){
+				// check if there is a parent slider.
+				// if not : user clicked elsewhere => close the slider.
+				if (!event.target.closest('.slider')){
+					console.log("Je ferme les sliders");
+					// comment ?
+				}
+			}
 		},
 		computed : {
 			listPhotosAlbums : function (){
@@ -115,6 +135,11 @@ h1 {
 	margin:0; padding:0;
 }
 
+a {
+	text-decoration: none;
+	color: #c00;
+}
+
 h1 {
 	left: 50%;
 	transform: translate(-50%,-50%);
@@ -128,7 +153,7 @@ span.faico {
 	display: inline-block;
 	z-index:40;
 	font-size: 40px;
-	color: #609;
+	color: #c00;
 }
 
 .listAlbums {
@@ -139,7 +164,7 @@ span.faico {
 
 li {
 	line-height:1.5rem;
-	color:#609;
+	color:#c00;
 	cursor: pointer;
 }
 

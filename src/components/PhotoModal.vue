@@ -1,7 +1,10 @@
 <template>
-	<div class="settings">
+	<div class="fullpage">
+		
+		<div class="mask" @click="closeModale()">
+		</div>
+
 		<div class="modale">
-			
 			<h2>{{photo.name}}</h2>
 			
 			<div class="cadrePhoto">
@@ -15,8 +18,8 @@
 				<softbutton @click.native="displayDetails = !displayDetails">Infos</softbutton>
 				<softbutton @click.native="closeModale()">Fermer</softbutton>
 			</div>
-
 		</div>
+		
 	</div>
 </template>
 
@@ -43,18 +46,24 @@
 </script>
 
 <style scoped>
-.settings {
+.fullpage {
 	width:100%;
 	height:100%;
 	/*top:0;*/
 	left:0;
 	right:0;
 	bottom:0;
-	background: rgba(0,0,0,0.5);
 	position: absolute;
 	z-index:200;
 	pointer-events:none;
 }
+.mask {
+	background: rgba(0,0,0,0.5);
+	width:100%;
+	height:100%;
+	pointer-events: auto;
+}
+
 .modale {
 	position: absolute;
 	top:50%;
@@ -77,7 +86,7 @@
 }
 
 img {
-	max-width:90vw;
+	max-width:calc(90vw - 24px);
 	max-height:70vh;
 }
 
@@ -86,5 +95,6 @@ img {
 	bottom:20px;
 	left:50%;
 	transform:translateX(-50%);
+	min-width:220px;
 }
 </style>

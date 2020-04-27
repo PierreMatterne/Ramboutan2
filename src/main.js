@@ -6,6 +6,9 @@ import {routes} from './routes.js';
 const router = new VueRouter({routes});
 Vue.use(VueRouter);
 
+// creation d'une event bus
+window.bus = new Vue();
+
 new Vue({
 	el: '#app',
 	router,
